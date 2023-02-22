@@ -35,7 +35,7 @@ vanE = False
 szavDb = 0
 
 for szav in valaszt:
-    if szav.vezetekN == veztekInput and szav.utoN == utoInput:
+    if szav.vezetekN == veztekInput:# and szav.utoN == utoInput:
         vanE = True
         szavdb = szav.szavazat
         break
