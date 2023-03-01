@@ -44,13 +44,58 @@ if vanE:
 else:
     print("Ilyen nevű képviselőjelölt nem szerepel a nyilvántartásban!")
 
+print("4. feladat")
+polgarokSzama = 12345
+szavatokSzama = 0
 
+for k in kepviselok:
+    szavatokSzama = szavatokSzama+k.szavazatok
+arany = round(szavatokSzama/polgarokSzama*100, 2)
 
+print("A választáson {} állampolgár, a jogosultak {}%-a vett részt.".format(szavatokSzama, arany))
 
+print("5. feladat")
+partok = ["GYEP", "HEP", "TISZ", "ZEP", "-"]
 
+for p in partok:
+    partSzavazatokSzama = 0
+    for k in kepviselok:
+        if k.part == p:
+            partSzavazatokSzama = partSzavazatokSzama+k.szavazatok
+    partArany = round(partSzavazatokSzama/szavatokSzama*100, 2)
+    if p == "GYEP":
+        print("Gyümölcsevők Pártja = {}%".format(partArany))
+    elif p == "HEP":
+        print("Húsevők Pártja = {}%".format(partArany))
+    elif p == "TISZ":
+        print("Tejivók Szövetsége = {}%".format(partArany))
+    elif p == "ZEP":
+        print("Zöldségevők Pártja = {}%".format(partArany))
+    else:
+        print("Független jelöltek = {}%".format(partArany))
 
+print("6. feladat")
+maximum = 0
+for k in kepviselok:
+    if k.szavazatok > maximum:
+        maximum = k.szavazatok
+for k in kepviselok:
+    if k.szavazatok == maximum and k.part != "-":
+        print("{} {} {}".format(k.vezetekN, k.utoN, k.part))
+    elif k.szavazatok == maximum and k.part == "-":
+        print("{} {} független".format(k.vezetekN, k.utoN))
 
+print("7. feladat")
+fileWrite = open("kepviselok.txt", "w")
 
-
-
-
+for i in range(1, 9):
+    maximum = 0
+    for k in kepviselok:
+        if k.kerulet == i and k.szavazatok > maximum:
+            maximum = k.szavazatok
+    for k in kepviselok:
+        if k.kerulet == i and k.szavazatok == maximum and k.part != "-":
+            fileWrite.write("{} {} {} {}\n".format(i, k.vezetekN, k.utoN, k.part))
+        elif k.kerulet == i and k.szavazatok == maximum and k.part == "-":
+            fileWrite.write("{} {} {} független\n".format(i, k.vezetekN, k.utoN))
+print("kész")
