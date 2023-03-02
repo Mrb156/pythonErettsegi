@@ -73,3 +73,12 @@ for m in meresek:
 
 print("7. feladat")
 
+fileOutput = open("vizsgalt.txt", "w")
+vizsgkezd = -300
+
+for m in meresek:
+    if vizsgkezd+300<=((m.ora*60+m.perc)*60+m.masodperc):
+        fileOutput.write("{} {} {} {}\n".format(m.ora, m.perc, m.masodperc, m.rendsz))
+        vizsgkezd = ((m.ora*60+m.perc)*60+m.masodperc)
+
+
